@@ -1,5 +1,5 @@
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand5) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand2) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand6) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand3) || mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand1))))))) {
+scene.onHitWall(SpriteKind.Player, function (sprite, location) {
+    if (controller.A.isPressed()) {
         mySprite.vy = -100
     }
 })
