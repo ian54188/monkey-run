@@ -3,7 +3,7 @@ scene.onHitWall(SpriteKind.Player, function (sprite, location) {
         mySprite.vy = -100
     }
 })
-scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral4, function (sprite, location) {
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
     mySprite.setPosition(10, 0)
 })
 let mySprite: Sprite = null
@@ -26,7 +26,7 @@ mySprite = sprites.create(img`
     . . . . f f f f f f f f f . . . 
     `, SpriteKind.Player)
 tiles.setCurrentTilemap(tilemap`级别1`)
-mySprite.setPosition(10, 0)
+mySprite.setPosition(30, 0)
 mySprite.ay = 150
 scene.cameraFollowSprite(mySprite)
 forever(function () {
