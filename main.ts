@@ -1,12 +1,56 @@
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, location) {
+    mySprite.sayText("按B交互", 500, false)
+    if (key == 0 && controller.B.isPressed()) {
+        game.showLongText("箱子：哈哈哈哈哈你没钥匙🔑", DialogLayout.Bottom)
+        game.showLongText("箱子：滚回地图开头吧！", DialogLayout.Bottom)
+        tiles.setTileAt(tiles.getTileLocation(1, 7), assets.tile`myTile2`)
+    }
+})
 scene.onHitWall(SpriteKind.Player, function (sprite, location) {
     if (controller.A.isPressed()) {
         mySprite.vy = -100
     }
 })
-scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
-    mySprite.setPosition(10, 0)
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.greenSwitchUp, function (sprite, location) {
+    if (controller.B.isPressed()) {
+        game.showLongText("好像发生了什么变化……", DialogLayout.Bottom)
+        tiles.setTileAt(tiles.getTileLocation(9, 5), assets.tile`myTile4`)
+        x = 0
+        for (let index = 0; index < 8; index++) {
+            tiles.setTileAt(tiles.getTileLocation(88, x), sprites.dungeon.darkGroundCenter)
+            x += 1
+        }
+    }
 })
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile3`, function (sprite, location) {
+    mySprite.sayText("按B交互", 500, false)
+    if (controller.B.isPressed()) {
+        game.showLongText("oh", DialogLayout.Bottom)
+        game.showLongText("获得了灵珠", DialogLayout.Bottom)
+        game.showLongText("好像还差一个", DialogLayout.Bottom)
+        game.showLongText("回传送门吧", DialogLayout.Bottom)
+        tiles.setTileAt(tiles.getTileLocation(89, 8), sprites.dungeon.darkGroundCenter)
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.hazardLava1, function (sprite, location) {
+    mySprite.setPosition(30, 0)
+    info.changeLifeBy(-1)
+})
+scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile2`, function (sprite, location) {
+    mySprite.sayText("按B交互", 500, false)
+    if (scene2 == 1 && controller.B.isPressed()) {
+        game.showLongText("啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊", DialogLayout.Bottom)
+        mySprite.setPosition(30, 0)
+        tiles.setCurrentTilemap(tilemap`级别3`)
+    }
+})
+let x = 0
 let mySprite: Sprite = null
+let scene2 = 0
+let key = 0
+info.setLife(5)
+key = 0
+scene2 = 1
 mySprite = sprites.create(img`
     . . . . f f f f f . . . . . . . 
     . . . f e e e e e f . . . . . . 
@@ -25,6 +69,8 @@ mySprite = sprites.create(img`
     . . . f d d c d d b b d f . . . 
     . . . . f f f f f f f f f . . . 
     `, SpriteKind.Player)
+game.showLongText("地图的尽头貌似有个箱子", DialogLayout.Bottom)
+game.showLongText("去看看", DialogLayout.Bottom)
 tiles.setCurrentTilemap(tilemap`级别1`)
 mySprite.setPosition(30, 0)
 mySprite.ay = 150
@@ -223,9 +269,9 @@ forever(function () {
 })
 forever(function () {
     if (controller.left.isPressed()) {
-        mySprite.vx = -50
+        mySprite.vx = -500
     } else if (controller.right.isPressed()) {
-        mySprite.vx = 50
+        mySprite.vx = 500
     } else {
         mySprite.vx = 0
     }
