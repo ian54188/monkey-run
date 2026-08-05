@@ -1,5 +1,13 @@
-let V = 0
-let mySprite = sprites.create(img`
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    if (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand5) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand2) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand6) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand3) || mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand1))))))) {
+        mySprite.vy = -100
+    }
+})
+scene.onOverlapTile(SpriteKind.Player, sprites.builtin.coral4, function (sprite, location) {
+    mySprite.setPosition(10, 0)
+})
+let mySprite: Sprite = null
+mySprite = sprites.create(img`
     . . . . f f f f f . . . . . . . 
     . . . f e e e e e f . . . . . . 
     . . f d d d d e e e f . . . . . 
@@ -19,7 +27,8 @@ let mySprite = sprites.create(img`
     `, SpriteKind.Player)
 tiles.setCurrentTilemap(tilemap`级别1`)
 mySprite.setPosition(10, 0)
-controller.moveSprite(mySprite)
+mySprite.ay = 150
+scene.cameraFollowSprite(mySprite)
 forever(function () {
     if (controller.right.isPressed()) {
         animation.runImageAnimation(
@@ -213,16 +222,11 @@ forever(function () {
     }
 })
 forever(function () {
-    scene.cameraFollowSprite(mySprite)
-})
-forever(function () {
-    if (controller.A.isPressed()) {
-        V += -0.1
-        mySprite.y += V
-    } else if (!(mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand5) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand2) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand6) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand7) || (mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand3) || mySprite.tileKindAt(TileDirection.Bottom, sprites.builtin.oceanSand1)))))))) {
-        V += 0.1
-        mySprite.y += V
+    if (controller.left.isPressed()) {
+        mySprite.vx = -50
+    } else if (controller.right.isPressed()) {
+        mySprite.vx = 50
     } else {
-        V = 0
+        mySprite.vx = 0
     }
 })
