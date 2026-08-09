@@ -7,15 +7,16 @@ scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile1`, function (sprite, l
             tiles.setTileAt(tiles.getTileLocation(1, 7), assets.tile`myTile2`)
         } else if (key == 2) {
             game.showLongText("箱子：饿啊！！ ！", DialogLayout.Bottom)
-            music.play(music.melodyPlayable(music.wawawawaa), music.PlaybackMode.UntilDone)
+            music.play(music.melodyPlayable(music.baDing), music.PlaybackMode.UntilDone)
             game.setGameOverMessage(true, "!!! it’s an empty box!!!")
             game.gameOver(true)
         }
     }
 })
 scene.onOverlapTile(SpriteKind.Player, assets.tile`myTile13`, function (sprite, location) {
-    mySprite.vy = -150
+    mySprite.vy = -200
     info.changeLifeBy(-1)
+    mySprite.sayText("啊", 500, false)
 })
 scene.onOverlapTile(SpriteKind.Player, sprites.dungeon.greenSwitchUp, function (sprite, location) {
     if (controller.B.isPressed()) {
@@ -125,7 +126,7 @@ let key = 0
 let lava = 0
 info.setLife(10)
 lava = 0
-key = 2
+key = 0
 scene2 = 1
 mySprite = sprites.create(img`
     . . . . f f f f f . . . . . . . 
